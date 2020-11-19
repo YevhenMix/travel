@@ -8,11 +8,11 @@
 {% for city in city_lst %}
 <div class="card my-4">
   <div class="card-header">
-    {{city.name}}
+    <h4><a href="{% url 'cities:detail' pk=city.id %}">{{city.name}}</a></h4>
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
-      <p>{{city.name}}</p>
+      <p>{% lorem 1 b random %}</p>
     </blockquote>
   </div>
 </div>

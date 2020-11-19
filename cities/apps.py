@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class CitiesConfig(AppConfig):
     name = 'cities'
-    verbose_name = 'Города'
+    verbose_name = 'Города Украины'
