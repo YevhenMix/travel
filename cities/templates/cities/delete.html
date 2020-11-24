@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %} Удалить город {% endblock %}
+
+{% block content %}
+<h1 class="display-4"> Точно хотите удалить город {{city.name}}?</h1>
+ <div class="row mx-auto">
+     <div class='col-md-4'>
+         <form action="{% url 'cities:delete_cor' pk=city.pk %}" method="post"> {% csrf_token %}
+         <input class="btn btn-danger" type="submit" value="Да, удалить!">
+         </form>
+     </div>
+ </div>
+
+{% endblock %}
