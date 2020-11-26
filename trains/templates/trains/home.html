@@ -1,35 +1,36 @@
 {% extends "base.html" %}
 
-{% block title %} Все города {% endblock %}
+{% block title %} Список Поездов {% endblock %}
 
-{% block content%}
-<h1 class="display-4 text-center my-4">Список городов</h1>
+{% block content %}
+
+<h1 class="display-4 text-center my-4">Список поездов</h1>
 
 <div class="row ">
   <div class='col-md-8 mx-auto'>
     <table class="table table-striped">
       <thead>
         <tr>
-          <th class="text-center" scope="col">Город</th>
-          <th class="text-center" scope="col">Количесто поездов</th>
+          <th class="text-center" scope="col">Поезд</th>
+          <th class="text-center" scope="col">Направление</th>
           <th class="text-center" scope="col">Редактировать</th>
         </tr>
       </thead>
-      {% for city in city_lst %}
+      {% for train in trains %}
       <tbody>
         <tr>
           <td class="text-center font-weight-bold">
-            <a href="{% url 'cities:detail' pk=city.id%}">
-              {{city.name}}
+            <a href="{% url 'trains:detail' pk=train.id%}">
+              {{train.name}}
             </a>
           </td>
-          <td class="text-center">{{city.id}}</td>
+          <td class="text-center">{{train}}</td>
           <td class="text-center"><button type="button" class="btn btn-outline-primary">
-            <a href="{% url 'cities:update' pk=city.id %}">
+            <a href="{% url 'trains:update' pk=train.id %}">
               <img src="https://img.icons8.com/plasticine/2x/pencil.png" width="25" height="25" alt="">
             </a></button>
             <button type="button" class="btn btn-outline-danger">
-            <a href="{% url 'cities:delete' pk=city.id %}">
+            <a href="{% url 'trains:delete' pk=train.id %}">
               <img src="https://cdn3.iconfinder.com/data/icons/softwaredemo/PNG/256x256/DeleteRed.png" width="25" height="25" alt="">
             </a></button>
           </td>
@@ -39,27 +40,27 @@
     </table>
     <nav aria-label="...">
       <ul class="pagination">
-        {% if city_lst.has_previous %}
+        {% if trains.has_previous %}
         <li class="page-item">
           <a class="page-link" href="?page=1">First</a>
         </li>
         <li class="page-item">
-          <a class="page-link" href="?page={{ city_lst.previous_page_number }}">&laquo;</a>
+          <a class="page-link" href="?page={{ trains.previous_page_number }}">&laquo;</a>
         </li>
         {% endif %}
 
-        {% for page in city_lst.paginator.page_range %}
-        <li class="page-item {% if page == city_lst.number %} active {% endif %}">
+        {% for page in trains.paginator.page_range %}
+        <li class="page-item {% if page == trains.number %} active {% endif %}">
           <a class="page-link" href="?page={{page}}">{{ page }}</a>
         </li>
         {% endfor %}
 
-        {% if city_lst.has_next %}
+        {% if trains.has_next %}
         <li class="page-item">
-          <a class="page-link" href="?page={{ city_lst.next_page_number }}">&raquo;</a>
+          <a class="page-link" href="?page={{ trains.next_page_number }}">&raquo;</a>
         </li>
         <li class="page-item">
-          <a class="page-link" href="?page={{ city_lst.paginator.num_pages }}">Last</a>
+          <a class="page-link" href="?page={{ trains.paginator.num_pages }}">Last</a>
         </li>
         {% endif %}
 
@@ -67,12 +68,5 @@
     </nav>
   </div>
 </div>
-
-
-
-
-
-
-
 
 {% endblock %}

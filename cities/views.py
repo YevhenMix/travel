@@ -10,7 +10,7 @@ from django.contrib import messages
 
 def show_all(request):
     city_lst = City.objects.all()
-    paginator = Paginator(city_lst, 4)
+    paginator = Paginator(city_lst, 5)
     page = request.GET.get('page')
     city_lst = paginator.get_page(page)
     context = {'city_lst': city_lst, }
