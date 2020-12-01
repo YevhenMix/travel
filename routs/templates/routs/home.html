@@ -1,0 +1,53 @@
+{% extends "base.html"%}
+
+{% block title %} Поиск маршрута {% endblock %}
+
+{%block content %}
+
+<h1 class="display-4 text-center">Поиск маршрута</h1>
+
+<div class="row">
+    {% if routes %}
+        <div class='col-md-8 mx-auto'>
+            {% for route in routes %}
+                {% if forloop.first %}<h5> Самый короткий маршрут </h5>{% endif %}
+                <div class="card {% if forloop.first %} border-success {%else%} border-primary{% endif %} mb-3 text-center mx-auto my-4" style="max-width: 50rem;">
+                  <div class="card-header bg-transparent {% if forloop.first %} border-success {%else%} border-primary{% endif %}">{{cities.from_city}} - {{cities.to_city}}</div>
+                      <div class="card-body">
+                          <h5 class="card-title">Список поездов</h5>
+                          {% for train in route.trains %}
+                            <p class="card-text">Поезд <strong> № {{train.name}}</strong>.
+                                Направления <strong>{{train}}</strong>.
+                                Время в пути {{train.travel_time}} часов</p>
+                          {% endfor %}
+                          <p class="my-2">Общее время в пути {{route.total_time}}</p>
+                      </div>
+                  <div class="card-footer bg-transparent {% if forloop.first %} border-success {%else%} border-primary{% endif %}">
+                      <p class="text-right my-auto"><button type="button" class="btn {% if forloop.first %} btn-outline-success {%else%} btn-outline-primary{% endif %}">
+                        <a href="#">Сохранить маршрут</a>
+                      </button></p>
+                  </div>
+                </div>
+            {%endfor%}
+        </div>
+    {% endif %}
+</div>
+
+
+ <div class="row">
+
+     <div class='col-md-4 mx-auto'>
+         <form action="{% url 'find_routes' %}" method="post"> {% csrf_token %}
+             <div class="my-4">
+                 {{form.as_p}}
+             </div>
+             <div class="form-row text-center">
+                <div class="col-12">
+                    <input class="btn btn-success my-4" type="submit" value="Поиск">
+                </div>
+             </div>
+     </form>
+     </div>
+ </div>
+
+{% endblock %}
