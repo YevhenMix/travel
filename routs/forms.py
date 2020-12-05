@@ -1,6 +1,7 @@
 from django import forms
 
 from cities.models import City
+from routs.models import Route
 
 
 class RouteForm(forms.Form):
@@ -19,3 +20,17 @@ class RouteForm(forms.Form):
     traveling_time = forms.IntegerField(label='Время в пути',
                                         widget=forms.NumberInput(attrs={'class': 'form-control',
                                                                         'placeholder': 'Время в пути'}))
+
+
+class RouteModelForm(forms.ModelForm):
+    name = forms.CharField(label='Назание маршрута',
+                           widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    from_city = forms.CharField(widget=forms.HiddenInput())
+    to_city = forms.CharField(widget=forms.HiddenInput())
+    trains = forms.CharField(widget=forms.HiddenInput())
+    travel_times = forms.IntegerField(widget=forms.HiddenInput())
+
+    class Meta:
+        model = Route
+        fields = ('name', 'from_city', 'to_city', 'trains', 'travel_times')

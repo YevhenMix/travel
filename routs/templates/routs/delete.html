@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %} Удалить маршрут {% endblock %}
+
+{% block content %}
+<h1 class="display-4"> Точно хотите удалить маршрут {{object.name}}?</h1>
+ <div class="row mx-auto">
+     <div class='col-md-4'>
+         <form action="{% url 'delete_rout_cor' pk=object.id %}" method="post"> {% csrf_token %}
+         <input class="btn btn-danger my-4" type="submit" value="Да, удалить!">
+             <a class="btn btn-primary" href="{% url 'all_routs' %}" role="button">Нет, оставить!</a>
+         </form>
+     </div>
+ </div>
+
+{% endblock %}

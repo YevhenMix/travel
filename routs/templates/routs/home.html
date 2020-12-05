@@ -10,6 +10,11 @@
     {% if routes %}
         <div class='col-md-8 mx-auto'>
             {% for route in routes %}
+                <form action="{% url 'add_route' %}" method="post"> {% csrf_token %}
+                 <input type='hidden' name='from_city' value='{{route.from_city}}'/>
+                 <input type='hidden' name='to_city' value='{{route.to_city}}'/>
+                 <input type='hidden' name='travel_times' value='{{route.total_time}}'/>
+                 <input type='hidden' name='trains' value='{% for train in route.trains %}{{train.id}} {% endfor %}'/>
                 {% if forloop.first %}<h5> Самый короткий маршрут </h5>{% endif %}
                 <div class="card {% if forloop.first %} border-success {%else%} border-primary{% endif %} mb-3 text-center mx-auto my-4" style="max-width: 50rem;">
                   <div class="card-header bg-transparent {% if forloop.first %} border-success {%else%} border-primary{% endif %}">{{cities.from_city}} - {{cities.to_city}}</div>
@@ -23,11 +28,14 @@
                           <p class="my-2">Общее время в пути {{route.total_time}}</p>
                       </div>
                   <div class="card-footer bg-transparent {% if forloop.first %} border-success {%else%} border-primary{% endif %}">
-                      <p class="text-right my-auto"><button type="button" class="btn {% if forloop.first %} btn-outline-success {%else%} btn-outline-primary{% endif %}">
-                        <a href="#">Сохранить маршрут</a>
-                      </button></p>
+                      <p class="text-right my-auto">
+                          <button type="submit" class="btn {% if forloop.first %} btn-outline-success {%else%} btn-outline-primary{% endif %}">
+                              Сохранить маршрут
+                          </button>
+                      </p>
                   </div>
                 </div>
+                </form>
             {%endfor%}
         </div>
     {% endif %}

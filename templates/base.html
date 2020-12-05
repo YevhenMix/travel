@@ -2,6 +2,7 @@
 {% url 'cities:all_cities' as cities_url %}
 {% url 'trains:home' as trains_url %}
 {% url 'home' as routs_url %}
+{% url 'all_routs' as all_routs_url %}
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -30,6 +31,9 @@
           </li>
           <li class="nav-item {% if request.path == trains_url %} active font-weight-bold{% endif %}">
             <a class="nav-link" href="{% url 'trains:home' %}">Поезда</a>
+          </li>
+          <li class="nav-item {% if request.path == all_routs_url %} active font-weight-bold{% endif %}">
+            <a class="nav-link" href="{% url 'all_routs' %}">Маршруты</a>
           </li>
         </ul>
         {% if request.path == cities_url %}

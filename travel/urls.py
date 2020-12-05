@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from routs.views import home, find_routes
+from routs.views import home, find_routes, add_route, save_route, RouteListView, RouteDetailView, RouteDeleteView, delete_rout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +23,10 @@ urlpatterns = [
     path('cities/', include('cities.urls', 'cities')),
     path('trains/', include('trains.urls', 'trains')),
     path('find/', find_routes, name='find_routes'),
+    path('add_rout/', add_route, name='add_route'),
+    path('save_route/', save_route, name='save_route'),
+    path('all_routs/', RouteListView.as_view(), name='all_routs'),
+    path('route_detail/<int:pk>', RouteDetailView.as_view(), name='route_detail'),
+    path('delete_rout/<int:pk>', RouteDeleteView.as_view(), name='delete_rout'),
+    path('delete_rout_cor/<int:pk>', delete_rout, name='delete_rout_cor'),
 ]
