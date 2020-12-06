@@ -7,6 +7,8 @@ from cities.forms import CityForm
 from cities.models import City
 from django.contrib import messages
 
+from trains.models import Train
+
 
 def show_all(request):
     city_lst = City.objects.all()
@@ -21,6 +23,11 @@ class CityDetailView(DetailView):
     queryset = City.objects.all()
     context_object_name = 'cities'
     template_name = 'cities/detail.html'
+
+    def get_context_data(self, **kwargs):
+        pk = self.kwargs['pk']
+        context = {'trains': Train.objects.filter(from_city=pk)}
+        return context
 
 
 class CityCreateView(SuccessMessageMixin, CreateView):

@@ -8,6 +8,7 @@
      <div class='col-md-4'>
          <form action="{% url 'trains:delete_cor' pk=train.pk %}" method="post"> {% csrf_token %}
          <input class="btn btn-danger my-4" type="submit" value="Да, удалить!">
+             <a class="btn btn-primary" href="{% url 'trains:home' %}" role="button">Нет, оставить!</a>
          </form>
      </div>
  </div>
