@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
@@ -26,30 +27,34 @@ class CityDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         pk = self.kwargs['pk']
-        context = {'trains': Train.objects.filter(from_city=pk)}
+        context = {'trains': Train.objects.filter(from_city=pk),
+                   'cities': City.objects.get(id=pk)}
         return context
 
 
-class CityCreateView(SuccessMessageMixin, CreateView):
+class CityCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = City
     form_class = CityForm
     template_name = 'cities/create.html'
     success_url = reverse_lazy('cities:all_cities')
     success_message = 'Город успешно создан!'
+    login_url = '/users/login/'
 
 
-class CityUpdateView(SuccessMessageMixin, UpdateView):
+class CityUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = City
     form_class = CityForm
     template_name = 'cities/update.html'
     success_url = reverse_lazy('cities:all_cities')
     success_message = 'Город успешно обновлен!'
+    login_url = '/users/login/'
 
 
-class CityDeleteView(SuccessMessageMixin, DeleteView):
+class CityDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     model = City
     template_name = 'cities/delete.html'
     success_url = reverse_lazy('cities:all_cities')
+    login_url = '/users/login/'
 
 
 def delete_city(request, pk):

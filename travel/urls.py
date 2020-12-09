@@ -22,6 +22,7 @@ urlpatterns = [
     path('', home, name='home'),
     path('cities/', include('cities.urls', 'cities')),
     path('trains/', include('trains.urls', 'trains')),
+    path('users/', include('users.urls', 'users')),
     path('find/', find_routes, name='find_routes'),
     path('add_rout/', add_route, name='add_route'),
     path('save_route/', save_route, name='save_route'),

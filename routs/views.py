@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -104,10 +105,11 @@ class RouteListView(ListView):
     paginate_by = 2
 
 
-class RouteDeleteView(SuccessMessageMixin, DeleteView):
+class RouteDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     model = Route
     template_name = 'routs/delete.html'
     success_url = reverse_lazy('all_routs')
+    login_url = '/users/login/'
 
 
 def delete_rout(request, pk):
