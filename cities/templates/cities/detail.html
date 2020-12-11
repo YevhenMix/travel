@@ -7,7 +7,7 @@
  <div class="row">
      <div class='col-md-6'>
          <p>Название города: {{cities.name}} </p>
-         <p>Доступніе поезда</p>
+         <p>Доступные поезда</p>
          {% for train in trains %}
             <p><a href="{% url 'trains:detail' pk=train.id%}">{{train}}</a></p>
          {% endfor %}

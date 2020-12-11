@@ -23,7 +23,12 @@
               {{city.name}}
             </a>
           </td>
-          <td class="text-center">{{city.id}}</td>
+          {% for ct, num in trains.items %}
+          {% if city == ct %}
+          <td class="text-center">{{num}}</td>
+          {% else %}
+          {% endif %}
+          {% endfor %}
           <td class="text-center"><button type="button" class="btn btn-outline-primary">
             <a href="{% url 'cities:update' pk=city.id %}">
               <img src="https://img.icons8.com/plasticine/2x/pencil.png" width="25" height="25" alt="">
@@ -36,6 +41,7 @@
         </tr>
       </tbody>
       {% endfor %}
+
     </table>
     <nav aria-label="...">
       <ul class="pagination">

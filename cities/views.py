@@ -13,10 +13,21 @@ from trains.models import Train
 
 def show_all(request):
     city_lst = City.objects.all()
+    train_lst = Train.objects.all()
+    tmp = {}
+    count = {}
+    for el in train_lst:
+        tmp.setdefault(el.from_city, [el])
+        tmp[el.from_city].append(el)
+    for city in city_lst:
+        try:
+            count.setdefault(city, len(tmp[city])-1)
+        except KeyError:
+            count[city] = 0
     paginator = Paginator(city_lst, 5)
     page = request.GET.get('page')
     city_lst = paginator.get_page(page)
-    context = {'city_lst': city_lst, }
+    context = {'city_lst': city_lst, 'trains': count}
     return render(request, 'cities/all_cities.html', context)
 
 

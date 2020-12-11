@@ -3,9 +3,9 @@
 {% block title %} Изменить город {% endblock %}
 
 {% block content %}
-<h1 class="display-4">Измените Город</h1>
- <div class="row mx-auto">
-     <div class='col-md-4 my-4'>
+<h1 class="display-4 text-center">Измените Город</h1>
+ <div class="row mx-auto text-center">
+     <div class='col-md-4 my-4 mx-auto'>
          <form action="" method="post"> {% csrf_token %}
              <div class="my-4">{{form.name}}</div>
          <input class="btn btn-success" type="submit" value="Сохранить">
